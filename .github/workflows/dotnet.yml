@@ -36,9 +36,13 @@ jobs:
         dotnet-version: 8.0.x
     - name: Publish
       run: dotnet publish -c Release -r win-x64 --self-contained -p:PublishSingleFile=true
+    - name: Create ZIP
+      run: |
+        cd ./bin/Release/net8.0-windows/win-x64/publish
+        7z a ../../../DSTSModTool.zip .
     - name: Upload Release
       uses: softprops/action-gh-release@v1
       with:
-        files: ./bin/Release/net8.0-windows/win-x64/publish/DSTSModTool.exe
+        files: ./bin/DSTSModTool.zip
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
