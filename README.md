@@ -44,7 +44,11 @@ A comprehensive GUI application for creating, managing, and installing mods for 
 
 ## Download
 
+### For Users
 Download the latest release from [Releases](https://github.com/levi-soft/DSTS-Mod-Tool/releases).
+
+### For Developers
+Clone this repository and run `build.bat` to build the application locally.
 
 ## Usage Guide
 
