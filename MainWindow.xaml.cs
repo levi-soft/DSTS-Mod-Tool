@@ -363,106 +363,58 @@ public partial class MainWindow : Window, INotifyPropertyChanged
             return;
         }
 
-        var mvglFiles = Directory.GetFiles(gamedataDir, "app_*.mvgl", SearchOption.AllDirectories);
-        if (mvglFiles.Length == 0)
+        // Determine target file based on mod type
+        string targetFile;
+        if (selectedMod.Type == "Data Mod")
         {
-            System.Windows.MessageBox.Show("No .mvgl files found in gamedata.");
+            targetFile = System.IO.Path.Combine(gamedataDir, "patch_0.dx11.mvgl");
+        }
+        else if (selectedMod.Type == "Language Mod")
+        {
+            // Assume English (01) for now - TODO: detect or select language
+            string languageCode = "01"; // English
+            targetFile = System.IO.Path.Combine(gamedataDir, $"patch_text{languageCode}.dx11.mvgl");
+        }
+        else
+        {
+            System.Windows.MessageBox.Show("Unknown mod type.");
             return;
         }
 
-        // Show file selection dialog
-        var selectWindow = new Window
+        // Run DSCSToolsCLI --pack
+        string cliPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Tools", "DSCSTools", "DSCSToolsCLI.exe");
+        if (!System.IO.File.Exists(cliPath))
         {
-            Title = "Select MVGL File to Patch",
-            Width = 400,
-            Height = 350,
-            ResizeMode = ResizeMode.NoResize,
-            WindowStartupLocation = WindowStartupLocation.CenterOwner,
-            Owner = this
-        };
-
-        var listBox = new ListBox { Margin = new Thickness(10), Height = 200 };
-        foreach (var file in mvglFiles)
-        {
-            listBox.Items.Add(System.IO.Path.GetFileName(file));
+            System.Windows.MessageBox.Show("DSCSToolsCLI.exe not found.");
+            return;
         }
 
-        var progressBar = new ProgressBar
+        var process = new System.Diagnostics.Process
         {
-            Margin = new Thickness(10),
-            IsIndeterminate = true,
-            Visibility = Visibility.Collapsed
-        };
-
-        var selectButton = new Button
-        {
-            Content = "Patch Mod",
-            Style = (Style)FindResource("ModernButton"),
-            HorizontalAlignment = HorizontalAlignment.Right
-        };
-
-        selectButton.Click += async (s, args) =>
-        {
-            if (listBox.SelectedItem != null)
+            StartInfo = new System.Diagnostics.ProcessStartInfo
             {
-                selectButton.IsEnabled = false;
-                progressBar.Visibility = Visibility.Visible;
-
-                string selectedFileName = listBox.SelectedItem.ToString();
-                string originalFile = mvglFiles[listBox.SelectedIndex];
-                string targetFileName = selectedFileName.Replace("app_", "patch_");
-                string targetFile = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(originalFile), targetFileName);
-
-                // Run DSCSToolsCLI --pack
-                string cliPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Tools", "DSCSTools", "DSCSToolsCLI.exe");
-                if (!System.IO.File.Exists(cliPath))
-                {
-                    System.Windows.MessageBox.Show("DSCSToolsCLI.exe not found.");
-                    progressBar.Visibility = Visibility.Collapsed;
-                    selectButton.IsEnabled = true;
-                    return;
-                }
-
-                var process = new System.Diagnostics.Process
-                {
-                    StartInfo = new System.Diagnostics.ProcessStartInfo
-                    {
-                        FileName = cliPath,
-                        Arguments = $"--pack \"{modDir}\" \"{targetFile}\"",
-                        UseShellExecute = false,
-                        RedirectStandardOutput = true,
-                        RedirectStandardError = true,
-                        CreateNoWindow = true
-                    }
-                };
-
-                process.Start();
-                string output = await process.StandardOutput.ReadToEndAsync();
-                string error = await process.StandardError.ReadToEndAsync();
-                process.WaitForExit();
-
-                progressBar.Visibility = Visibility.Collapsed;
-                selectButton.IsEnabled = true;
-
-                if (process.ExitCode == 0)
-                {
-                    System.Windows.MessageBox.Show($"Mod installed successfully. Patched file: {targetFile}");
-                }
-                else
-                {
-                    System.Windows.MessageBox.Show($"Error installing mod: {error}");
-                }
+                FileName = cliPath,
+                Arguments = $"--pack \"{modDir}\" \"{targetFile}\"",
+                UseShellExecute = false,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                CreateNoWindow = true
             }
-            selectWindow.Close();
         };
 
-        var stackPanel = new StackPanel();
-        stackPanel.Children.Add(new TextBlock { Text = "Select MVGL file to patch:", Margin = new Thickness(10, 10, 10, 5) });
-        stackPanel.Children.Add(listBox);
-        stackPanel.Children.Add(progressBar);
-        stackPanel.Children.Add(selectButton);
-        selectWindow.Content = stackPanel;
-        selectWindow.ShowDialog();
+        process.Start();
+        string output = process.StandardOutput.ReadToEnd();
+        string error = process.StandardError.ReadToEnd();
+        process.WaitForExit();
+
+        if (process.ExitCode == 0)
+        {
+            System.Windows.MessageBox.Show($"Mod installed successfully. Patched file: {targetFile}");
+        }
+        else
+        {
+            System.Windows.MessageBox.Show($"Error installing mod: {error}");
+        }
     }
 
     private void UninstallModButton_Click(object sender, RoutedEventArgs e)
