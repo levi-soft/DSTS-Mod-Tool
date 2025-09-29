@@ -15,4 +15,9 @@
     <PackageReference Include="CsvHelper" Version="33.1.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Include="Tools/**/*" CopyToPublishDirectory="PreserveNewest" />
+    <Content Include="banner.png" CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+
 </Project>

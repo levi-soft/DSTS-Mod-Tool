@@ -1,7 +1,7 @@
 # Digimon Story: Time Stranger Mod Tool
 
 [![.NET](https://img.shields.io/badge/.NET-8.0-blue)](https://dotnet.microsoft.com/)
-[![Build Status](https://github.com/YOUR_USERNAME/YOUR_REPO/actions/workflows/dotnet.yml/badge.svg)](https://github.com/YOUR_USERNAME/YOUR_REPO/actions/workflows/dotnet.yml)
+[![Build Status](https://github.com/levi-soft/DSTS-Mod-Tool/actions/workflows/dotnet.yml/badge.svg)](https://github.com/levi-soft/DSTS-Mod-Tool/actions/workflows/dotnet.yml)
 
 A comprehensive GUI application for creating, managing, and installing mods for Digimon Story modding community, supporting mod creation, installation, and file processing tools like MVGL extractor, CPK packer, MBE editor, image processor, and text editor.
 
@@ -49,6 +49,18 @@ A comprehensive GUI application for creating, managing, and installing mods for 
 2. Ensure .NET 8.0 SDK is installed
 3. Build the project: `dotnet build`
 4. Run the application: `dotnet run`
+
+## Tools Setup
+
+To use the full functionality of the mod tool, you need to download the required tools:
+
+1. Download the Tools.zip from the [Releases](https://github.com/levi-soft/DSTS-Mod-Tool/releases) page.
+2. Extract the Tools.zip file into the root directory of the project (where DSTSModTool.csproj is located).
+3. The Tools folder should contain subfolders for DSCSTools, YACpkTool, THL-MBE-Parser, and compressonator.
+
+Alternatively, download the pre-built release which includes all tools integrated.
+
+For source code users, after cloning the repository, download and extract the Tools as described above.
 
 ## Usage Guide
 

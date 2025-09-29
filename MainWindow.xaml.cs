@@ -1282,7 +1282,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
             HorizontalAlignment = HorizontalAlignment.Right
         };
 
-        selectButton.Click += async (s, args) =>
+        selectButton.Click += (s, args) =>
         {
             if (listBox.SelectedItem != null)
             {

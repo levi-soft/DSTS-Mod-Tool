@@ -2,7 +2,7 @@
 using System.Data;
 using System.Windows;
 
-namespace DigimonModTool;
+namespace DSTSModTool;
 
 /// <summary>
 /// Interaction logic for App.xaml
