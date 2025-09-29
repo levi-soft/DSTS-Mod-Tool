@@ -36,6 +36,3 @@ logs/
 *.tmp
 *.temp
 *.swp
-
-# Tools directory (download separately)
-Tools/

@@ -50,18 +50,6 @@ A comprehensive GUI application for creating, managing, and installing mods for 
 3. Build the project: `dotnet build`
 4. Run the application: `dotnet run`
 
-## Tools Setup
-
-To use the full functionality of the mod tool, you need to download the required tools:
-
-1. Download the Tools.zip from the [Releases](https://github.com/levi-soft/DSTS-Mod-Tool/releases) page.
-2. Extract the Tools.zip file into the root directory of the project (where DSTSModTool.csproj is located).
-3. The Tools folder should contain subfolders for DSCSTools, YACpkTool, THL-MBE-Parser, and compressonator.
-
-Alternatively, download the pre-built release which includes all tools integrated.
-
-For source code users, after cloning the repository, download and extract the Tools as described above.
-
 ## Usage Guide
 
 1. **Game Path Setup**: Click "Browse" to select your Digimon Story: Time Stranger installation directory
