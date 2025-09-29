@@ -371,9 +371,71 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         }
         else if (selectedMod.Type == "Language Mod")
         {
-            // Assume English (01) for now - TODO: detect or select language
-            string languageCode = "01"; // English
-            targetFile = System.IO.Path.Combine(gamedataDir, $"patch_text{languageCode}.dx11.mvgl");
+            // Show language selection dialog
+            var languageWindow = new Window
+            {
+                Title = "Select Language",
+                Width = 300,
+                Height = 200,
+                ResizeMode = ResizeMode.NoResize,
+                WindowStartupLocation = WindowStartupLocation.CenterOwner,
+                Owner = this
+            };
+
+            var stackPanel = new StackPanel { Margin = new Thickness(20) };
+
+            var label = new TextBlock { Text = "Select language:", Margin = new Thickness(0, 0, 0, 10) };
+            var comboBox = new ComboBox { Margin = new Thickness(0, 0, 0, 20) };
+
+            // Load languages from file
+            string languageFile = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "language code");
+            if (File.Exists(languageFile))
+            {
+                var lines = File.ReadAllLines(languageFile);
+                foreach (var line in lines)
+                {
+                    if (!string.IsNullOrWhiteSpace(line))
+                    {
+                        comboBox.Items.Add(line);
+                    }
+                }
+            }
+            comboBox.SelectedIndex = 0; // Default to first
+
+            var selectButton = new Button
+            {
+                Content = "Select",
+                Style = (Style)FindResource("ModernButton"),
+                HorizontalAlignment = HorizontalAlignment.Right
+            };
+
+            string selectedLanguageCode = "";
+            selectButton.Click += (s, args) =>
+            {
+                if (comboBox.SelectedItem != null)
+                {
+                    string selectedLine = comboBox.SelectedItem.ToString();
+                    var parts = selectedLine.Split(' ');
+                    if (parts.Length > 0)
+                    {
+                        selectedLanguageCode = parts[0];
+                    }
+                }
+                languageWindow.Close();
+            };
+
+            stackPanel.Children.Add(label);
+            stackPanel.Children.Add(comboBox);
+            stackPanel.Children.Add(selectButton);
+            languageWindow.Content = stackPanel;
+            languageWindow.ShowDialog();
+
+            if (string.IsNullOrEmpty(selectedLanguageCode))
+            {
+                return; // Cancelled
+            }
+
+            targetFile = System.IO.Path.Combine(gamedataDir, $"patch_text{selectedLanguageCode}.dx11.mvgl");
         }
         else
         {
