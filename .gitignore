@@ -5,6 +5,10 @@ obj/
 *.dll
 *.pdb
 
+# But include in Tools
+!Tools/**/*.exe
+!Tools/**/*.dll
+
 # NuGet packages
 packages/
 *.nupkg
