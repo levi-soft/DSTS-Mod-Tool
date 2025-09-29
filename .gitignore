@@ -43,6 +43,4 @@ logs/
 
 # Screenshots (optional, if not wanted in repo)
 screenshots/
-
-# Screenshots
-screenshots/
+*.png
