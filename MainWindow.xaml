@@ -1,0 +1,155 @@
+﻿<Window x:Class="DSTSModTool.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DSTSModTool"
+        mc:Ignorable="d"
+        Title="DSTS Mod Tool" Height="600" Width="800" ResizeMode="CanResize"
+        Background="#F0F0F0" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <Style x:Key="ModernButton" TargetType="Button">
+            <Setter Property="Background" Value="#007ACC"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Margin" Value="0,0,5,0"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#005A9E"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="GroupBoxStyle" TargetType="GroupBox">
+            <Setter Property="Margin" Value="0,0,0,10"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="#CCCCCC"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+    </Window.Resources>
+    <Grid Background="#F5F5F5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="385"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Top: Select game path -->
+        <Grid Grid.Row="0" Grid.Column="0" Margin="10,10,0,5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Text="Game Path:" VerticalAlignment="Center" Margin="0,0,10,0"/>
+            <TextBox Grid.Column="1" x:Name="GamePathTextBox" IsReadOnly="True"/>
+            <Button Grid.Column="2" x:Name="BrowseButton" Content="Browse" Style="{StaticResource ModernButton}" Margin="10,0,0,0" Click="BrowseButton_Click"/>
+        </Grid>
+
+        <!-- Banner image on the right -->
+        <Image x:Name="BannerImage" Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" Stretch="Uniform" Margin="10"/>
+
+        <!-- Main tabs -->
+        <TabControl x:Name="MainTabControl" Grid.Row="1" Grid.Column="0" Margin="10,0,0,10" IsEnabled="{Binding IsGamePathSelected}">
+            <!-- Tab MOD -->
+            <TabItem Header="MOD">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Mod list -->
+                    <ListBox x:Name="ModListBox" Grid.Row="0" Margin="0,0,0,10" AllowDrop="True" Drop="ModListBox_Drop" KeyDown="ModListBox_KeyDown">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}" Margin="0,0,10,0"/>
+                                    <TextBlock Text="{Binding Name}" VerticalAlignment="Center"/>
+                                    <TextBlock Text=" (" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding Type}" VerticalAlignment="Center"/>
+                                    <TextBlock Text=")" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+                    <!-- Buttons -->
+                    <Grid Grid.Row="1" Margin="0,10,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <!-- Left: Create and Add -->
+                        <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left">
+                            <Button x:Name="CreateModButton" Content="Create Mod" Style="{StaticResource ModernButton}" Click="CreateModButton_Click"/>
+                            <Button x:Name="AddModButton" Content="Add Mod" Style="{StaticResource ModernButton}" Click="AddModButton_Click"/>
+                        </StackPanel>
+                        <!-- Right: Install and Uninstall -->
+                        <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button x:Name="InstallModButton" Content="Install Mod" Style="{StaticResource ModernButton}" Click="InstallModButton_Click"/>
+                            <Button x:Name="UninstallModButton" Content="Uninstall Mod" Style="{StaticResource ModernButton}" Click="UninstallModButton_Click"/>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </TabItem>
+
+            <!-- Tab TOOL -->
+            <TabItem Header="TOOL">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel Margin="10">
+                        <!-- MVGL Tool -->
+                        <GroupBox Header="MVGL Tool" Style="{StaticResource GroupBoxStyle}">
+                            <StackPanel Orientation="Horizontal">
+                                <Button x:Name="MVGLExtactButton" Content="Extract" Style="{StaticResource ModernButton}" Click="MVGLExtactButton_Click"/>
+                                <Button x:Name="MVGLHelpButton" Content="Help" Style="{StaticResource ModernButton}" Click="MVGLHelpButton_Click"/>
+                            </StackPanel>
+                        </GroupBox>
+
+                        <!-- CPK Tool -->
+                        <GroupBox Header="CPK Tool" Style="{StaticResource GroupBoxStyle}">
+                            <StackPanel Orientation="Horizontal">
+                                <Button x:Name="CPKExtractButton" Content="Extract" Style="{StaticResource ModernButton}" Click="CPKExtractButton_Click"/>
+                                <Button x:Name="CPKRepackButton" Content="Repack" Style="{StaticResource ModernButton}" Click="CPKRepackButton_Click"/>
+                                <Button x:Name="CPKHelpButton" Content="Help" Style="{StaticResource ModernButton}" Click="CPKHelpButton_Click"/>
+                            </StackPanel>
+                        </GroupBox>
+
+                        <!-- MBE Tool -->
+                        <GroupBox Header="MBE Tool" Style="{StaticResource GroupBoxStyle}">
+                            <StackPanel Orientation="Horizontal">
+                                <Button x:Name="MBEExtractButton" Content="Extract" Style="{StaticResource ModernButton}" Click="MBEExtractButton_Click"/>
+                                <Button x:Name="MBERepackButton" Content="Repack" Style="{StaticResource ModernButton}" Click="MBERepackButton_Click"/>
+                                <Button x:Name="MBEHelpButton" Content="Help" Style="{StaticResource ModernButton}" Click="MBEHelpButton_Click"/>
+                            </StackPanel>
+                        </GroupBox>
+
+                        <!-- IMG Tool -->
+                        <GroupBox Header="IMG Tool" Style="{StaticResource GroupBoxStyle}">
+                            <StackPanel Orientation="Horizontal">
+                                <Button x:Name="IMGExtractButton" Content="Extract" Style="{StaticResource ModernButton}" Click="IMGExtractButton_Click"/>
+                                <Button x:Name="IMGRepackButton" Content="Repack" Style="{StaticResource ModernButton}" Click="IMGRepackButton_Click"/>
+                                <Button x:Name="IMGHelpButton" Content="Help" Style="{StaticResource ModernButton}" Click="IMGHelpButton_Click"/>
+                            </StackPanel>
+                        </GroupBox>
+
+                        <!-- TEXT Tool -->
+                        <GroupBox Header="TEXT Tool" Style="{StaticResource GroupBoxStyle}">
+                            <StackPanel Orientation="Horizontal">
+                                <Button x:Name="TEXTExtractButton" Content="Extract" Style="{StaticResource ModernButton}" Click="TEXTExtractButton_Click"/>
+                                <Button x:Name="TEXTRepackButton" Content="Repack" Style="{StaticResource ModernButton}" Click="TEXTRepackButton_Click"/>
+                                <Button x:Name="TEXTHelpButton" Content="Help" Style="{StaticResource ModernButton}" Click="TEXTHelpButton_Click"/>
+                            </StackPanel>
+                        </GroupBox>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
