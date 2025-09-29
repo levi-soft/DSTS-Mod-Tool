@@ -65,6 +65,17 @@ Digimon Story Time Stranger, Mod Tool, GUI Application, PC Modding, Game Mods, M
 
 Contributions welcome! Please feel free to submit issues and pull requests.
 
+## Acknowledgments
+
+This project uses and gratefully acknowledges the following open-source tools and libraries:
+
+- **DSCSTools**: [SydMontague/DSCSTools](https://github.com/SydMontague/DSCSTools) - Used for DSCSToolsCLI.exe
+- **YACpkTool**: [Brolijah/YACpkTool](https://github.com/Brolijah/YACpkTool) - Used for YACpkTool.exe
+- **THL-MBE-Parser**: [Ahtheerr/THL-MBE-Parser](https://github.com/Ahtheerr/THL-MBE-Parser) - Used for MBE_Parser.py and MBE_Repacker.py
+- **Compressonator**: [GPUOpen-Tools/compressonator](https://github.com/GPUOpen-Tools/compressonator) - Used for compressonatorcli.exe
+
+Special thanks to the developers of these tools for their contributions to the modding community.
+
 ## License
 
 Open source project. Individual tool licenses may apply - please check respective tool documentation.
