@@ -33,10 +33,10 @@ jobs:
       with:
         dotnet-version: 8.0.x
     - name: Publish
-      run: dotnet publish DSTSModTool.csproj -c Release -r win-x64 --self-contained
+      run: dotnet publish DSTSModTool.csproj -c Release -r win-x64 --self-contained -p:PublishSingleFile=true -p:PublishTrimmed=true
     - name: Create ZIP
       run: |
-        Compress-Archive -Path "./bin/Release/net8.0-windows/win-x64/publish" -DestinationPath "./bin/DSTSModTool.zip" -CompressionLevel Optimal
+        Compress-Archive -Path "./bin/Release/net8.0-windows/win-x64/publish/DSTSModTool.exe" -DestinationPath "./bin/DSTSModTool.zip"
       shell: pwsh
     - name: Upload Release
       uses: softprops/action-gh-release@v1
