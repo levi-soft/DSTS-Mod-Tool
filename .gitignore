@@ -5,12 +5,22 @@ obj/
 *.dll
 *.pdb
 
-# User settings
+# NuGet packages
+packages/
+*.nupkg
+
+# Publish outputs
+publish/
+
+# User settings and secrets
 settings.json
+appsettings.json
+secrets.json
+*.user
 
 # IDE files
 .vscode/
-*.user
+.vscode/settings.json
 *.suo
 *.tmp
 
@@ -19,8 +29,10 @@ settings.json
 Thumbs.db
 
 # Logs
+logs/
 *.log
 
 # Temporary files
 *.tmp
 *.temp
+*.swp

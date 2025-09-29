@@ -5,6 +5,8 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+  release:
+    types: [published]
 
 jobs:
   build:
@@ -22,3 +24,21 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
+
+  release:
+    if: github.event_name == 'release'
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 8.0.x
+    - name: Publish
+      run: dotnet publish -c Release -r win-x64 --self-contained -p:PublishSingleFile=true
+    - name: Upload Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: ./bin/Release/net8.0-windows/win-x64/publish/DSTSModTool.exe
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
