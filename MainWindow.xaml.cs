@@ -138,7 +138,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
                 }
                 else if (Directory.Exists(System.IO.Path.Combine(dir, "message")))
                 {
-                    modType = "Language Mod";
+                    modType = "Text Mod";
                 }
                 var mod = new Mod { Name = modName, Type = modType };
                 mod.PropertyChanged += Mod_PropertyChanged;
@@ -244,7 +244,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         var nameTextBox = new TextBox { Margin = new Thickness(0, 0, 0, 10) };
 
         var typeLabel = new TextBlock { Text = "Mod Type:", Margin = new Thickness(0, 0, 0, 5) };
-        var typeComboBox = new ComboBox { ItemsSource = new[] { "Data Mod", "Language Mod" }, SelectedIndex = 0, Margin = new Thickness(0, 0, 0, 20) };
+        var typeComboBox = new ComboBox { ItemsSource = new[] { "Data Mod", "Text Mod" }, SelectedIndex = 0, Margin = new Thickness(0, 0, 0, 20) };
 
         var createButton = new Button
         {
@@ -283,7 +283,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
                 Directory.CreateDirectory(System.IO.Path.Combine(modDir, "lua"));
                 Directory.CreateDirectory(System.IO.Path.Combine(modDir, "shaders"));
             }
-            else if (modType == "Language Mod")
+            else if (modType == "Text Mod")
             {
                 Directory.CreateDirectory(System.IO.Path.Combine(modDir, "font"));
                 Directory.CreateDirectory(System.IO.Path.Combine(modDir, "images"));
@@ -369,7 +369,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         {
             targetFile = System.IO.Path.Combine(gamedataDir, "patch_0.dx11.mvgl");
         }
-        else if (selectedMod.Type == "Language Mod")
+        else if (selectedMod.Type == "Text Mod")
         {
             // Show language selection dialog
             var languageWindow = new Window
