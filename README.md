@@ -1,6 +1,7 @@
 # Digimon Story: Time Stranger Mod Tool
 
 [![.NET](https://img.shields.io/badge/.NET-8.0-blue)](https://dotnet.microsoft.com/)
+[![Build Status](https://github.com/levi-soft/DSTS-Mod-Tool/actions/workflows/dotnet.yml/badge.svg)](https://github.com/levi-soft/DSTS-Mod-Tool/actions/workflows/dotnet.yml)
 
 A comprehensive GUI application for creating, managing, and installing mods for Digimon Story modding community, supporting mod creation, installation, and file processing tools like MVGL extractor, CPK packer, MBE editor, image processor, and text editor.
 
