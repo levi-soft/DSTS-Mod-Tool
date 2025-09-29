@@ -40,3 +40,6 @@ logs/
 *.tmp
 *.temp
 *.swp
+
+# Screenshots
+screenshots/
