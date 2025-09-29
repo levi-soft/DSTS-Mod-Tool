@@ -387,20 +387,26 @@ public partial class MainWindow : Window, INotifyPropertyChanged
             var label = new TextBlock { Text = "Select language:", Margin = new Thickness(0, 0, 0, 10) };
             var comboBox = new ComboBox { Margin = new Thickness(0, 0, 0, 20) };
 
-            // Load languages from file
-            string languageFile = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "language code");
-            if (File.Exists(languageFile))
+            // Load languages from hardcoded list (code, name)
+            var languages = new (string Code, string Name)[]
             {
-                var lines = File.ReadAllLines(languageFile);
-                foreach (var line in lines)
-                {
-                    if (!string.IsNullOrWhiteSpace(line))
-                    {
-                        comboBox.Items.Add(line);
-                    }
-                }
+                ("00", "Japanese"),
+                ("01", "English"),
+                ("02", "Français"),
+                ("03", "Español"),
+                ("04", "Deutsch"),
+                ("05", "Italiano"),
+                ("07", "Brasil (Portuguès)"),
+                ("09", "Korean"),
+                ("10", "Chinese (Traditional)"),
+                ("11", "Chinese (Simplified)"),
+                ("30", "Latinoamérica (Español)")
+            };
+            foreach (var lang in languages)
+            {
+                comboBox.Items.Add(lang.Name);
             }
-            comboBox.SelectedIndex = 0; // Default to first
+            comboBox.SelectedIndex = 1; // Default to English
 
             var selectButton = new Button
             {
@@ -412,14 +418,9 @@ public partial class MainWindow : Window, INotifyPropertyChanged
             string selectedLanguageCode = "";
             selectButton.Click += (s, args) =>
             {
-                if (comboBox.SelectedItem != null)
+                if (comboBox.SelectedIndex >= 0)
                 {
-                    string selectedLine = comboBox.SelectedItem.ToString();
-                    var parts = selectedLine.Split(' ');
-                    if (parts.Length > 0)
-                    {
-                        selectedLanguageCode = parts[0];
-                    }
+                    selectedLanguageCode = languages[comboBox.SelectedIndex].Code;
                 }
                 languageWindow.Close();
             };
