@@ -43,12 +43,9 @@ A comprehensive GUI application for creating, managing, and installing mods for 
 - Windows 10 or higher
 - Digimon Story: Time Stranger game installed
 
-## Installation & Setup
+## Download
 
-1. Clone this repository
-2. Ensure .NET 8.0 SDK is installed
-3. Build the project: `dotnet build`
-4. Run the application: `dotnet run`
+Download the latest release from [Releases](https://github.com/levi-soft/DSTS-Mod-Tool/releases).
 
 ## Usage Guide
 
