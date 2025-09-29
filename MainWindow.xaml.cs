@@ -233,6 +233,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
             Title = "Create New Mod",
             Width = 400,
             Height = 250,
+            ResizeMode = ResizeMode.NoResize,
             WindowStartupLocation = WindowStartupLocation.CenterOwner,
             Owner = this
         };
@@ -375,6 +376,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
             Title = "Select MVGL File to Patch",
             Width = 400,
             Height = 350,
+            ResizeMode = ResizeMode.NoResize,
             WindowStartupLocation = WindowStartupLocation.CenterOwner,
             Owner = this
         };
@@ -486,6 +488,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
             Title = "Select Patch File to Uninstall",
             Width = 400,
             Height = 350,
+            ResizeMode = ResizeMode.NoResize,
             WindowStartupLocation = WindowStartupLocation.CenterOwner,
             Owner = this
         };
@@ -564,6 +567,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
             Title = "Select MVGL File",
             Width = 400,
             Height = 350,
+            ResizeMode = ResizeMode.NoResize,
             WindowStartupLocation = WindowStartupLocation.CenterOwner,
             Owner = this
         };
@@ -659,6 +663,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
             Title = "Select CPK File",
             Width = 400,
             Height = 350,
+            ResizeMode = ResizeMode.NoResize,
             WindowStartupLocation = WindowStartupLocation.CenterOwner,
             Owner = this
         };
@@ -732,6 +737,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
             Title = "Select Folder to Repack",
             Width = 400,
             Height = 350,
+            ResizeMode = ResizeMode.NoResize,
             WindowStartupLocation = WindowStartupLocation.CenterOwner,
             Owner = this
         };
@@ -824,6 +830,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
             Title = "Select Extracted Folder",
             Width = 400,
             Height = 350,
+            ResizeMode = ResizeMode.NoResize,
             WindowStartupLocation = WindowStartupLocation.CenterOwner,
             Owner = this
         };
@@ -929,6 +936,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
             Title = "Select MBE Folder to Repack",
             Width = 400,
             Height = 350,
+            ResizeMode = ResizeMode.NoResize,
             WindowStartupLocation = WindowStartupLocation.CenterOwner,
             Owner = this
         };
@@ -1038,6 +1046,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
             Title = "Select Extracted Folder",
             Width = 400,
             Height = 350,
+            ResizeMode = ResizeMode.NoResize,
             WindowStartupLocation = WindowStartupLocation.CenterOwner,
             Owner = this
         };
@@ -1144,6 +1153,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
             Title = "Select IMG Folder to Repack",
             Width = 400,
             Height = 350,
+            ResizeMode = ResizeMode.NoResize,
             WindowStartupLocation = WindowStartupLocation.CenterOwner,
             Owner = this
         };
@@ -1247,6 +1257,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
             Title = "Select MBE Extracted Folder",
             Width = 400,
             Height = 350,
+            ResizeMode = ResizeMode.NoResize,
             WindowStartupLocation = WindowStartupLocation.CenterOwner,
             Owner = this
         };
@@ -1324,6 +1335,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
             Title = "Select TSV File to Split",
             Width = 400,
             Height = 350,
+            ResizeMode = ResizeMode.NoResize,
             WindowStartupLocation = WindowStartupLocation.CenterOwner,
             Owner = this
         };
